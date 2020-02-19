@@ -13,28 +13,30 @@ generateGrid();
 }*/
 
 
-function generateGrid() {
-  //generate 10 by 10 grid
-  grid.innerHTML="";
-  
-  for (var i=0; i<10; i++) {
+function generateGrid() 
+{
+  //10x10
+  grid.innerHTML="";//luc reset map khong bi long len nhau
+  for (var i=0; i<10; i++) 
+  {
     row = grid.insertRow(i);
-    for (var j=0; j<10; j++) {
+    for (var j=0; j<10; j++) 
+    {
       cell = row.insertCell(j);
-      cell.setAttribute("clicked","false");
+      cell.setAttribute("clicked","false");// thuoc tinh kiem tra xem min da click hay chua
       cell.oncontextmenu = function()
       {
         //alert('hello');
        
         if (this.getAttribute("data-mine")=="true"&&this.getAttribute("clicked")=="false") 
         {
-          this.setAttribute("clicked","true");
+          this.setAttribute("clicked","true");//set lai
           this.className="mine";
           numOfMine++;
           //alert(numOfMine);
         } 
         checkLevelCompletion();
-        return false;
+        return false;// khong hien menu khi click phai
       }
       cell.onclick = function() { clickCell(this); };
       var mine = document.createAttribute("data-mine");       
@@ -99,9 +101,10 @@ function clickCell(cell)
     cell.className="clicked";
     //dem so node ke
     var mineCount=0;
-    var cellRow = cell.parentNode.rowIndex;
+    var cellRow = cell.parentNode.rowIndex;//row->cell
     var cellCol = cell.cellIndex;
     //alert(cellRow + " " + cellCol);
+    //dem min o may o xung quanh
     for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
     {
       for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
