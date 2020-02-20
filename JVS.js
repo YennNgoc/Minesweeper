@@ -23,19 +23,26 @@ function generateGrid()
     for (var j=0; j<10; j++) 
     {
       cell = row.insertCell(j);
-      cell.setAttribute("clicked","false");// thuoc tinh kiem tra xem min da click hay chua
+      cell.innerHTML="";
+      //cell.setAttribute("clicked","false");// thuoc tinh kiem tra xem min da click hay chua
       cell.oncontextmenu = function()
       {
         //alert('hello');
-       
-        if (this.getAttribute("data-mine")=="true"&&this.getAttribute("clicked")=="false") 
+        //----THIS IS MY BUG =))
+        /*if (this.getAttribute("data-mine")=="true"&&this.getAttribute("clicked")=="false") 
         {
           this.setAttribute("clicked","true");//set lai
           this.className="mine";
           numOfMine++;
           //alert(numOfMine);
+
         } 
-        checkLevelCompletion();
+        checkLevelCompletion();*/
+       
+        if (this.innerText=="x")
+          this.innerHTML="";
+        else
+          this.innerHTML="x";
         return false;// khong hien menu khi click phai
       }
       cell.onclick = function() { clickCell(this); };
@@ -83,7 +90,8 @@ function checkLevelCompletion()
         if ((grid.rows[i].cells[j].getAttribute("data-mine")=="false") && (grid.rows[i].cells[j].innerHTML=="")) levelComplete=false;
       }
   }
-  if (levelComplete || numOfMine==20) {
+  //if (levelComplete || numOfMine==20) {
+  if (levelComplete) {
     alert("You Win!");
     revealMines();
   }
